@@ -137,40 +137,43 @@ Your processed images will pop up in separate windows AND get saved to the `outp
 
 ```python
 import cv2
-import sys
+import numpy as np
+import os
 
-# Read the image
+# 📥 Read your image (change the path to YOUR image!)
 img = cv2.imread("your_image.jpg")
 
-# Convert to grayscale
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+# 🎯 Method 1: Binary Inverse Threshold (on color image)
+retval, threshold = cv2.threshold(img, 6, 220, cv2.THRESH_BINARY_INV)
 
-# Apply Gaussian Blur to remove noise
-gaus = cv2.GaussianBlur(gray, (21, 21), 0)
+# Convert to grayscale for better thresholding
+grayscaled = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-# 🎯 Method 1: Binary Threshold
-_, threshold = cv2.threshold(gaus, 127, 255, cv2.THRESH_BINARY)
+# 🎯 Method 2: Binary Threshold (on grayscale)
+retval2, threshold2 = cv2.threshold(grayscaled, 12, 255, cv2.THRESH_BINARY)
 
-# 🎯 Method 2: Otsu's Binarization (auto threshold!)
-_, threshold2 = cv2.threshold(gaus, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+# 🎯 Method 3: Adaptive Gaussian Threshold (handles uneven lighting!)
+gaus = cv2.adaptiveThreshold(grayscaled, 255,
+    cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 115, 1)
 
-# 🎯 Method 3: Adaptive Threshold (handles uneven lighting)
-threshold3 = cv2.adaptiveThreshold(
-    gaus, 255,
-    cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
-    cv2.THRESH_BINARY, 11, 2
-)
+# 💾 AUTO SAVE — saves all processed images automatically
+output_dir = "output"
+os.makedirs(output_dir, exist_ok=True)
+cv2.imwrite(f"{output_dir}/threshold.jpg", threshold)
+cv2.imwrite(f"{output_dir}/threshold2.jpg", threshold2)
+cv2.imwrite(f"{output_dir}/gaus.jpg", gaus)
+print(f"✅ All images saved to '{output_dir}/' folder!")
 
-# Show results
+# 🖼️ Show results
 cv2.imshow("Original", img)
-cv2.imshow("Threshold - Binary", threshold)
-cv2.imshow("Threshold - Otsu", threshold2)
-cv2.imshow("Threshold - Adaptive", threshold3)
+cv2.imshow("Thresholded", threshold)
+cv2.imshow("Thresholded2", threshold2)
+cv2.imshow("gaus", gaus)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
 
-> **Yep, that's it. Copy it. Use it. Love it.** ❤️
+> **Yep, that's it. Copy it. Change the image path. Run it. Love it.** ❤️
 
 <br/>
 
