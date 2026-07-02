@@ -114,24 +114,14 @@ Your processed images will pop up in separate windows AND get saved to the `outp
 
 ### Before → After (Real Example)
 
-<table>
-<tr>
-<td align="center"><b>📷 Original (Dark & Blurry)</b></td>
-<td align="center"><b>🌫️ Gaussian Blur Applied</b></td>
-</tr>
-<tr>
-<td><img src="assets/demo_original.jpg" alt="Original" width="400"/></td>
-<td><img src="assets/demo_gaussian.jpg" alt="Gaussian" width="400"/></td>
-</tr>
-<tr>
-<td align="center"><b>⚫⚪ Binary Threshold</b></td>
-<td align="center"><b>🎯 Otsu's / Adaptive Threshold</b></td>
-</tr>
-<tr>
-<td><img src="assets/demo_threshold1.jpg" alt="Threshold 1" width="400"/></td>
-<td><img src="assets/demo_threshold2.jpg" alt="Threshold 2" width="400"/></td>
-</tr>
-</table>
+<img src="assets/demo_result.png" alt="Demo Result - All 4 stages" width="90%"/>
+
+<br/>
+
+| 🔲 Top-Left | 🔲 Top-Right | 🔲 Bottom-Left | 🔲 Bottom-Right |
+|:---:|:---:|:---:|:---:|
+| **Original** (dark & blurry) | **Gaussian Blur** (noise removed) | **Threshold Method 2** (Otsu's) | **Threshold Method 1** (Binary) |
+| *Can barely read it* 😵 | *Getting clearer...* 🤔 | *B&W clarity* ✨ | *Full color threshold* 🎨 |
 
 <br/>
 
