@@ -1,7 +1,7 @@
 import cv2
 import os
 
-img = cv2.imread("/Users/ayushgupta/Desktop/PYTHON/OPENCV/book.png")
+img = cv2.imread("Your_img.png")
 
 retval , threshold = cv2.threshold(img , 6 , 220 , cv2.THRESH_BINARY_INV)
 
